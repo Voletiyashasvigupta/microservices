@@ -1,0 +1,53 @@
+services:
+  service-registry:
+    image: service-registry:1.0
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - csbmicroservicesnetwork
+
+  api-gateway:
+    image: api-gateway:1.0
+    container_name: api-gateway
+    ports:
+      - "8765:8765"
+    networks:
+      - csbmicroservicesnetwork
+    depends_on:
+      - service-registry
+
+  auth-service:
+    image: auth-service:1.0
+    container_name: auth-service
+    ports:
+      - "9898:9898"
+    networks:
+      - csbmicroservicesnetwork
+    depends_on:
+      - service-registry
+
+  customer-service:
+    image: customer-service:1.0
+    container_name: customer-service
+    ports:
+      - "8081:8081"
+    networks:
+      - csbmicroservicesnetwork
+    depends_on:
+      - service-registry
+
+  account-service:
+    image: account-service:1.0
+    container_name: account-service
+    ports:
+      - "8082:8082"
+    networks:
+      - csbmicroservicesnetwork
+    depends_on:
+      - service-registry
+
+networks:
+  csbmicroservicesnetwork:
+    external: true
+    name: csbmicroservicesnetwork
