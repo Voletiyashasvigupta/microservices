@@ -38,3 +38,4 @@ spec:
       targetPort: 9898
   selector:
     app: auth-service
+

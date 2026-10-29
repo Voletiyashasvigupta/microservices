@@ -10,9 +10,8 @@ spring:
         add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowedOrigins:
-              - "http://localhost:5173"
-              - "http://localhost:3000"
+            allowedOriginPatterns:
+              - "*"
             allowedMethods:
               - GET
               - POST
@@ -24,6 +23,10 @@ spring:
               - "*"
             allowCredentials: false
       routes:
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
         - id: account-service
           uri: lb://ACCOUNTS
           predicates:
@@ -49,4 +52,3 @@ eureka:
 security:
   jwt:
     secret: "local-demo-secret-change-this-before-production-123456789"
-

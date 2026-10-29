@@ -38,3 +38,4 @@ spec:
       targetPort: 8765
   selector:
     app: api-gateway
+
